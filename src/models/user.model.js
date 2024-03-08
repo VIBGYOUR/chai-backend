@@ -5,11 +5,11 @@ import bcrypt from "bcrypt"
 
 
 const userSchema = new Schema({
-    userName:{
+    username:{
         type:String,
         required:true,
         unique: true,
-        lowerCase: true,
+        lowercase: true,
         trim: true,
         index: true
     },
@@ -17,7 +17,7 @@ const userSchema = new Schema({
         type:String,
         required:true,
         unique: true,
-        lowerCase: true,
+        lowercase: true,
         trim: true,
     },
     fullName:{
@@ -28,10 +28,10 @@ const userSchema = new Schema({
     },
     avatar:{
         type: String,//cloudinary url
-        require:true
+        required:true
     },
     coverImage:{
-        type: String,
+        type: String, //cloudinary url
     },
     watchHistory:[
         {
@@ -63,7 +63,7 @@ userSchema.methods.generateAccessToken = function(){
    return jwt.sign({
         _id: this._id,
         email: this.email,
-        username: this.userName,
+        username: this.username,
         fullName: this.fullName
     },
     process.env.ACCESS_TOKEN_SECRET,{
